@@ -1,0 +1,17 @@
+FC = gfortran # Fortran compiler
+FCFLAGS = -O3
+LDFLAGS = -lm
+
+all: mmf
+
+mmf: main.o mm.o
+	$(FC) -o $@ $^ $(LDFLAGS)
+
+mm.o: mm.f90
+	$(FC) -c $(FCFLAGS) $<
+
+main.o: main.f90
+	$(FC) -c $(FCFLAGS) $<
+
+clean:
+	rm *.o *.mod
